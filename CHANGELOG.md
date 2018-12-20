@@ -2,7 +2,9 @@
 
 ## Apollo Client (vNext)
 
-### Apollo Client (vNext)
+## Apollo Client (2.4.8)
+
+### Apollo Client (2.4.8)
 
 - Documtation and config updates.  <br/>
   [@justinanastos](https://github.com/justinanastos) in [#4187](https://github.com/apollographql/apollo-client/pull/4187)  <br/>
@@ -13,12 +15,27 @@
   `graphql/language/printer`. If you need this functionality, import it
   directly: `import { print } from "graphql/language/printer"`
 
-### Apollo Utilities (vNext)
+### Apollo Utilities (1.0.27)
 
 - Schema/AST tranformation utilities have been updated to work properly with
   `@client` directives.  <br/>
   [@justinmakaila](https://github.com/justinmakaila) in [#3482](https://github.com/apollographql/apollo-client/pull/3482)
 
+### Apollo Cache In-Memory (1.3.12)
+
+- Avoid using `DepTrackingCache` for optimistic reads.
+  [PR #4521](https://github.com/apollographql/apollo-client/pull/4251)
+
+- When creating an `InMemoryCache` object, it's now possible to disable the
+  result caching behavior introduced in [#3394](https://github.com/apollographql/apollo-client/pull/3394),
+  either for diagnostic purposes or because the benefit of caching repeated
+  reads is not worth the extra memory usage in your application:
+  ```ts
+  new InMemoryCache({
+    resultCaching: false
+  })
+  ```
+  Part of [PR #4521](https://github.com/apollographql/apollo-client/pull/4251).
 
 ## Apollo Client (2.4.7)
 
