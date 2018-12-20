@@ -18,7 +18,7 @@ import { QueryStoreValue } from '../data/queries';
 
 export type ApolloCurrentResult<T> = {
   data: T | {};
-  errors?: GraphQLError[];
+  errors?: ReadonlyArray<GraphQLError>;
   loading: boolean;
   networkStatus: NetworkStatus;
   error?: ApolloError;
@@ -220,7 +220,8 @@ export class ObservableQuery<
   public isDifferentFromLastResult(newResult: ApolloQueryResult<TData>) {
     const { lastResultSnapshot: snapshot } = this;
     return !(
-      snapshot && newResult &&
+      snapshot &&
+      newResult &&
       snapshot.networkStatus === newResult.networkStatus &&
       snapshot.stale === newResult.stale &&
       isEqual(snapshot.data, newResult.data)
@@ -348,7 +349,9 @@ export class ObservableQuery<
   // XXX the subscription variables are separate from the query variables.
   // if you want to update subscription variables, right now you have to do that separately,
   // and you can only do it by stopping the subscription and then subscribing again with new variables.
-  public subscribeToMore<TSubscriptionData = TData>(options: SubscribeToMoreOptions<TData, TVariables, TSubscriptionData>) {
+  public subscribeToMore<TSubscriptionData = TData>(
+    options: SubscribeToMoreOptions<TData, TVariables, TSubscriptionData>,
+  ) {
     const subscription = this.queryManager
       .startGraphQLSubscription({
         query: options.document,
@@ -358,13 +361,14 @@ export class ObservableQuery<
         next: (subscriptionData: { data: TSubscriptionData }) => {
           if (options.updateQuery) {
             this.updateQuery((previous, { variables }) =>
-              (options.updateQuery as UpdateQueryFn<TData, TVariables, TSubscriptionData>)(
-                previous,
-                {
-                  subscriptionData,
-                  variables,
-                },
-              ),
+              (options.updateQuery as UpdateQueryFn<
+                TData,
+                TVariables,
+                TSubscriptionData
+              >)(previous, {
+                subscriptionData,
+                variables,
+              }),
             );
           }
         },

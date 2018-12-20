@@ -9,7 +9,7 @@ export type QueryStoreValue = {
   previousVariables?: Object | null;
   networkStatus: NetworkStatus;
   networkError?: Error | null;
-  graphQLErrors?: GraphQLError[];
+  graphQLErrors?: ReadonlyArray<GraphQLError>;
   metadata: any;
 };
 
@@ -77,7 +77,7 @@ export class QueryStore {
       networkStatus = NetworkStatus.loading;
     }
 
-    let graphQLErrors: GraphQLError[] = [];
+    let graphQLErrors: ReadonlyArray<GraphQLError> = [];
     if (previousQuery && previousQuery.graphQLErrors) {
       graphQLErrors = previousQuery.graphQLErrors;
     }
