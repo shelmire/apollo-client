@@ -38,7 +38,7 @@ These options will be merged with options supplied with each request.
 
 > **Note:** The React Apollo `<Query />` component uses Apollo Client's `watchQuery` functionality, so if you would like to set `defaultOptions` when using `<Query />`, be sure to set them under the `defaultOptions.watchQuery` property.
 
-The `ApolloClient` class is the core API for Apollo, and the one you'll need to  use no matter which integration you are using:
+The `ApolloClient` class is the core API for Apollo, and the one you'll need to use no matter which integration you are using:
 
 {% tsapibox ApolloClient.constructor %}
 {% tsapibox ApolloClient.watchQuery %}
@@ -52,6 +52,9 @@ The `ApolloClient` class is the core API for Apollo, and the one you'll need to 
 {% tsapibox ApolloClient.resetStore %}
 {% tsapibox ApolloClient.onResetStore %}
 {% tsapibox ApolloClient.clearStore %}
+{% tsapibox ApolloClient.onClearStore %}
+{% tsapibox ApolloClient.stop %}
+{% tsapibox ApolloClient.reFetchObservableQueries %}
 
 <h2 id="ObservableQuery">ObservableQuery</h2>
 
@@ -59,7 +62,7 @@ The `ApolloClient` class is the core API for Apollo, and the one you'll need to 
 
 {% tsapibox ObservableQuery.variables %}
 {% tsapibox ObservableQuery.result %}
-{% tsapibox ObservableQuery.currentResult %}
+{% tsapibox ObservableQuery.getCurrentResult %}
 {% tsapibox ObservableQuery.refetch %}
 {% tsapibox ObservableQuery.setOptions %}
 {% tsapibox ObservableQuery.setVariables %}
@@ -75,4 +78,4 @@ The `ApolloClient` class is the core API for Apollo, and the one you'll need to 
 {% tsapibox DefaultOptions %}
 {% tsapibox NetworkStatus %}
 {% tsapibox ApolloQueryResult %}
-{% tsapibox ApolloCurrentResult %}
+{% tsapibox ApolloCurrentQueryResult %}
